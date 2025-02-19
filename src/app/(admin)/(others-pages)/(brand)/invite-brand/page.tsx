@@ -1,48 +1,19 @@
 "use client";
 
-import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import React, { useState } from "react";
 import Button from "@/components/ui/button/Button";
+import BrandModal from "@/components/modal/brand-modal";
 
-interface BrandModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+export default function InviteBrandPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-// ✅ 개별 라벨 + 입력 필드 컴포넌트
-function LabeledInput({ label }: { label: string }) {
   return (
-    <div className="flex items-center gap-2">
-      <label className="whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300">
-        {label}
-      </label>
-      <Input placeholder={`${label}을 입력하세요`} />
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">브랜드 초대</h1>
+      <Button onClick={() => setIsModalOpen(true)}>브랜드 추가</Button>
+
+      {/* ✅ `BrandModal`을 페이지가 아닌 컴포넌트로 사용 */}
+      <BrandModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
-  );
-}
-
-export default function BrandModal({ isOpen, onClose }: BrandModalProps) {
-  return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>브랜드 추가</DialogTitle>
-        </DialogHeader>
-
-        <div className="space-y-4">
-          {["입력 1", "입력 2", "입력 3", "입력 4"].map((label, index) => (
-            <LabeledInput key={index} label={label} />
-          ))}
-        </div>
-
-        <DialogFooter className="flex justify-end gap-2 mt-4">
-          <Button variant="outline" onClick={onClose}>
-            취소
-          </Button>
-          <Button variant="primary">저장</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
   );
 }

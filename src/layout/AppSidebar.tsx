@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
   BoxCubeIcon,
+  BuildingsIcon,
   CalenderIcon,
   ChevronDownIcon,
   GridIcon,
@@ -17,7 +18,7 @@ import {
   TableIcon,
   TaskIcon,
   UserCircleIcon,
-} from "../icons/index";
+} from "../icons/index"; 
 import SidebarWidget from "./SidebarWidget";
 
 type NavItem = {
@@ -35,12 +36,23 @@ const navItems: NavItem[] = [
                { name: "월 통계(개발 중)", path: "/monthly", pro: false }],
   },
   {
-    name: "회원사관리",
-    icon: <TableIcon />,
-    subItems: [{ name: "회원사 목록", path: "/brand", pro: false },
+    name: "회사",
+    icon: <BuildingsIcon />,
+    subItems: [
+      { name: "회사 기본정보", path: "/companyInfo", pro: false },
+      { name: "브랜드 관리", path: "/brand", pro: false },
+      { name: "부서 관리", path: "/department", pro: false },
+      { name: "직위/직책 관리", path: "/position", pro: false },
     ],
   },
-  { name: "거래처관리" , icon: <TaskIcon />,   path: "/customer" },
+{
+    name: "거래처",
+    icon: <TaskIcon />,
+    subItems: [
+      { name: "전체 거래처 관리", path: "/customer", pro: false },
+      { name: "거리채 승인요청 관리", path: "/customer/approval", pro: false },
+    ],
+  },
   {
     name: "주문",
     icon: <TableIcon />,

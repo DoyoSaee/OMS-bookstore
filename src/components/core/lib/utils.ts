@@ -55,14 +55,13 @@ export const addOpacity = (col: string, opacity: number) => {
   const { r, g, b } = hexToRgb(col);
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };
-
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: unknown[]) => void>(
   func: T,
   wait: number,
 ): T {
   let timeout: ReturnType<typeof setTimeout> | null = null;
 
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     if (timeout !== null) {
       clearTimeout(timeout);
     }
@@ -74,11 +73,13 @@ export function debounce<T extends (...args: any[]) => void>(
   } as T;
 }
 
-export function log(...args: any[]) {
-  if (process.env.NODE_ENV !== 'production') {
+
+export function log(...args: unknown[]) {
+  if (process.env.NODE_ENV !== "production") {
     console.info(...args);
   }
 }
+
 
 export const getCookie = (name: string): string | undefined => {
   const cookies = document.cookie
@@ -117,14 +118,12 @@ export function getKeyByValue<T extends object, K extends keyof T>(
 
 export const isEmptyObject = (obj: object) => Object.keys(obj).length === 0;
 
-export const notNullish = (value: any): boolean => {
+export const notNullish = (value: unknown): boolean => {
   return value !== null && value !== undefined;
 };
 
-export function flatten<T>(data: any): T[] {
-  return data
-    ? data?.pages?.flatMap((page: { content: T[] }) => page?.content)
-    : [];
+export function flatten<T>(data: { pages?: { content: T[] }[] }): T[] {
+  return data?.pages?.flatMap((page) => page?.content) ?? [];
 }
 
 export function combineDateAndTime(date: Date, time: string): string {

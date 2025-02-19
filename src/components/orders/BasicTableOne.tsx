@@ -151,7 +151,7 @@ export default function BasicTableOne() {
               {tableData.map((order) => (
                 <TableRow key={order.id} 
                           className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-                          onClick={() => router.push(`/order-tables/${order.order.orderId}`)}
+                          onClick={() => router.push(`/order/${order.order.orderId}`)}
                 >
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">

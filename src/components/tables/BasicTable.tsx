@@ -16,7 +16,7 @@ interface BasicTableProps<T> {
   onRowClick?: (row: T) => void; // 클릭 이벤트 핸들러
 }
 
-export default function BasicTable<T extends Record<string, any>>({
+export default function BasicTable<T extends Record<string, unknown>>({
   data,
 }: BasicTableProps<T>) {
 
@@ -52,27 +52,34 @@ export default function BasicTable<T extends Record<string, any>>({
                   className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                 >
                   {headers.map((header) => (
-                    <TableCell key={String(header)} className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                      {typeof row[header] === "object" ? (
-                        row[header]?.image ? (
-                          <div className="flex items-center gap-3">
-                            <Image width={40} height={40} src={row[header].image} alt={row[header].name} />
-                            <div>
-                              <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                {row[header].name}
-                              </span>
-                              <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                {row[header].orderId}
-                              </span>
-                            </div>
-                          </div>
-                        ) : (
-                          JSON.stringify(row[header]) // 기타 객체 데이터를 표시
-                        )
-                      ) : (
-                        <span>{row[header] as string | number}</span>
-                      )}
-                    </TableCell>
+                    
+<TableCell key={String(header)} className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+  {typeof row[header] === "object" && row[header] !== null ? (
+    isImageData(row[header]) ? ( // ✅ 안전한 타입 체크 후 변환
+      <div className="flex items-center gap-3">
+        <Image
+          width={40}
+          height={40}
+          src={row[header].image} // ✅ 이제 TypeScript가 오류 없이 인식 가능
+          alt={row[header].name ?? "이미지"}
+        />
+        <div>
+          <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
+            {row[header].name ?? "이름 없음"}
+          </span>
+          <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
+            {row[header].orderId ?? ""}
+          </span>
+        </div>
+      </div>
+    ) : (
+      JSON.stringify(row[header]) // 기타 객체 데이터를 JSON 형태로 표시
+    )
+  ) : (
+    <span>{String(row[header])}</span>
+  )}
+</TableCell>
+
                   ))}
                 </TableRow>
               ))}
@@ -81,5 +88,16 @@ export default function BasicTable<T extends Record<string, any>>({
         </div>
       </div>
     </div>
+  );
+}
+
+
+// ✅ 이미지 데이터인지 확인하는 타입 가드 함수 추가
+function isImageData(obj: unknown): obj is { image: string; name?: string; orderId?: string } {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "image" in obj &&
+    typeof (obj as { image: unknown }).image === "string"
   );
 }
