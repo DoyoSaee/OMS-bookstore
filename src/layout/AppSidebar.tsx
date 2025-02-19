@@ -15,6 +15,7 @@ import {
   PieChartIcon,
   PlugInIcon,
   TableIcon,
+  TaskIcon,
   UserCircleIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
@@ -28,17 +29,26 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   {
-    icon: <GridIcon />,
     name: "대시보드",
-    subItems: [{ name: "일 통계", path: "/", pro: false } ,{ name: "월 통계(개발 중)", path: "/monthly", pro: false }],
+    icon: <GridIcon />,
+    subItems: [{ name: "일 통계", path: "/", pro: false } ,
+               { name: "월 통계(개발 중)", path: "/monthly", pro: false }],
   },
-   {
-    name: "주문",
+  {
+    name: "회원사관리",
     icon: <TableIcon />,
-    subItems: [{ name: "주문 목록", path: "/order-tables", pro: false },
-               { name: "사고건 목록", path: "/claim-tables", pro: false }
+    subItems: [{ name: "회원사 목록", path: "/brand", pro: false },
     ],
   },
+  { name: "거래처관리" , icon: <TaskIcon />,   path: "/customer" },
+  {
+    name: "주문",
+    icon: <TableIcon />,
+    subItems: [{ name: "주문 목록", path: "/order", pro: false },
+               { name: "사고건 목록", path: "/claim", pro: false }
+    ],
+  },
+  
 ];
 
 const othersItems: NavItem[] = [

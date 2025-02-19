@@ -62,11 +62,11 @@ const OrderDetailPage = () => {
 
   return (
     <div className="flex flex-col gap-y-2xl p-6">
-      <div className="border rounded-md bg-white shadow-sm">
-        <h1 className="text-title3 rounded-md p-4 bg-gray-100">주문 정보</h1>
-        <hr />
+      <div className="border rounded-md bg-white shadow-sm dark:border-white/[0.05] dark:bg-white/[0.03] ">
+        <h1 className="text-title3 rounded-md p-4 bg-gray-100 dark:text-white/90 dark:border-white/[0.55] dark:bg-white/[0.03]">주문 정보</h1>
+        <hr className=' dark:border-white/[0.3] '/>
         {order ? (
-          <div className="flex flex-col gap-y-4xs py-4 px-5">
+          <div className="flex flex-col gap-y-4xs py-4 px-5 dark:text-white/90">
             <LabelAndValue label="주문번호" value={order.order.orderId} className={commonClass} />
             <LabelAndValue label="출판사" value={order.publisherName} className={commonClass} />
             <LabelAndValue label="배송 상태" value={order.logisticsState} className={commonClass} />
@@ -80,8 +80,8 @@ const OrderDetailPage = () => {
       </div>
 
       {/* 도서 리스트 공간 (현재 데이터 없음) */}
-      <div className="border rounded-md bg-white shadow-sm h-[200px] flex items-center justify-center mt-10">
-        <p className="text-gray-400">도서 정보 없음</p>
+      <div className="border rounded-md bg-white shadow-sm h-[200px] flex items-center justify-center mt-10 dark:border-white/[0.05]  dark:bg-white/[0.03]">
+        <p className="text-gray-400 dark:text-white/90">도서 정보 없음</p>
       </div>
     </div>
   );

@@ -8,6 +8,41 @@
   body {
     @apply relative text-base font-normal z-1 bg-gray-50 font-outfit;
   }
+
+  /* 기본 스크롤바 스타일 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* 스크롤바 트랙 */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+/* 스크롤바 썸 */
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+/* 스크롤바 썸 (호버 시) */
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
 }
 
 @layer components {
