@@ -1,15 +1,10 @@
 {
   "version": 2,
-  "builds": [
+  "framework": "nextjs",
+  "rewrites": [
     {
-      "src": "app/layout.tsx",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app/layout.tsx"
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
